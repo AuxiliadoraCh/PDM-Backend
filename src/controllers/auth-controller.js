@@ -1,7 +1,6 @@
-import { Request, Response } from 'express'
-import { signUp, signIn } from '../services/auth-service'
+import { signUp, signIn } from '../services/auth-service.js'
 
-export const registerUser = async (req: Request, res: Response) => {
+export const registerUser = async (req, res) => {
   const { email, password } = req.body
   try {
     const user = await signUp(email, password)
@@ -11,7 +10,7 @@ export const registerUser = async (req: Request, res: Response) => {
   }
 }
 
-export const loginUser = async (req: Request, res: Response) => {
+export const loginUser = async (req, res) => {
   const { email, password } = req.body
   try {
     const user = await signIn(email, password)

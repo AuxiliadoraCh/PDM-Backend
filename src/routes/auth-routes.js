@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { registerUser, loginUser } from '../controllers/auth-controller'
+import { registerUser, loginUser } from '../controllers/auth-controller.js'
 
-const authRoutes = Router()
+let authRoutes = Router()
 
 authRoutes.post('/register', registerUser)
 authRoutes.post('/login', loginUser)
