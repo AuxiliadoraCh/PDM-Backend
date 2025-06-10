@@ -4,7 +4,7 @@ import { verifyUser } from '../middlewares/auth.middleware.js';
 
 let incomeRoutes = Router();
 
-incomeRoutes.post('/', addIncome);
+incomeRoutes.post('/',verifyUser, addIncome);
 incomeRoutes.get('/', fetchIncomes);
 incomeRoutes.get('/:id', fetchIncomeById);
 incomeRoutes.put('/:id', updateIncome);
