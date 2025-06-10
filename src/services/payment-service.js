@@ -1,9 +1,9 @@
 import { supabase } from "../config/supabase-client.js";
 
-export const createPayment = async (name) => {
+export const createPayment = async (name,user_id) => {
     return await supabase
     .from("payment_methods")
-    .insert([{ name }])
+    .insert([{ name, user_id}])
     .select()
 }
 

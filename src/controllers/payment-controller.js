@@ -2,6 +2,7 @@ import { createPayment,getPaymentMethods,deletePaymentMethod } from "../services
 
 export const addPaymentMethod = async (req, res) => {
     const {name} = req.body;
+    const user_id = req.user.id
     try {
         const {data,error} = await createPayment(name);
         if (error) throw new Error(error.message)
