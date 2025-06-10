@@ -6,8 +6,8 @@ let incomeRoutes = Router();
 
 incomeRoutes.post('/',verifyUser, addIncome);
 incomeRoutes.get('/', fetchIncomes);
-incomeRoutes.get('/:id', fetchIncomeById);
-incomeRoutes.put('/:id', updateIncome);
-incomeRoutes.delete('/:id', deleteIncome);
+incomeRoutes.get('/:id', verifyUser,fetchIncomeById);
+incomeRoutes.put('/:id', verifyUser,updateIncome);
+incomeRoutes.delete('/:id', verifyUser,deleteIncome);
 
 export default incomeRoutes;
