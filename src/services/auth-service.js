@@ -23,6 +23,9 @@ export const signIn = async (email, password) => {
     throw new Error(`Error signing in: ${error.message}`);
   }
 
-  return data?.user ?? null;
+  return {
+    user: data?.user ?? null,
+    access_token:data.session?.access_token ?? null
+  }
 };
 

@@ -6,6 +6,6 @@ const expenseRoutes = Router()
 expenseRoutes.post('/', postExpense)
 expenseRoutes.get('/:user_id', getUserExpenses)
 expenseRoutes.put('/:id', updateUserExpenses)
-expenseRoutes.delete('/:id', removeExpense)
+expenseRoutes.delete('/:id', deleteUserExpenses)
 
 export default expenseRoutes
