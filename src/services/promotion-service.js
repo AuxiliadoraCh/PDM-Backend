@@ -1,12 +1,12 @@
 import { supabase } from "../config/supabase-client.js";
 
-export const createPromotion = async (title,description,data,active,start_date,end_date,images) => {
+export const createPromotion = async (title,description,restaurants,active,start_date,end_date,images) => {
     return await supabase
     .from('promotions')
     .insert([{
         title,
         description,
-        data: JSON.stringify(data),
+        restaurants,
         active,
         start_date,
         end_date,
@@ -43,4 +43,11 @@ export const deletePromotion = async (id) => {
     .delete()
     .eq('id', id)
     .select()
+}
+
+export const getActivePromotions = async () => {
+        return await supabase
+        .from('promotions')
+        .select('*')
+        .eq('active', true) 
 }

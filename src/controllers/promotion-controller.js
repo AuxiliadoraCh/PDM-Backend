@@ -1,9 +1,9 @@
-import { createPromotion,getPromotionById,getPromotions,updatePromotion,deletePromotion } from "../services/promotion-service.js";
+import { createPromotion,getPromotionById,getPromotions,updatePromotion,deletePromotion,getActivePromotions } from "../services/promotion-service.js";
 
 export const addPromotion = async (req, res) => {
-    const {title, description,data,active,start_date,end_date,images} = req.body;
+    const {title, description,restaurants,active,start_date,end_date,images} = req.body;
     try {
-        const {insertedData,error} = await createPromotion(title, description, data, active, start_date, end_date, images);
+        const {insertedData,error} = await createPromotion(title, description, restaurants, active, start_date, end_date, images);
         if (error) throw new Error(error.message);
         res.status(201).json({ message: 'Promotion added successfully', insertedData});
     } catch (error) {
@@ -50,6 +50,16 @@ export const deletePromotionById = async (req, res) => {
         const {data, error} = await deletePromotion(id);
         if (error) throw new Error(error.message);
         res.status(200).json({ message: 'Promotion deleted successfully', data });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
+export const getActivePromotion = async (req, res) => {
+    try {
+        const {data, error} = await getActivePromotions();
+        if (error) throw new Error(error.message);
+        res.status(200).json( data );
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
