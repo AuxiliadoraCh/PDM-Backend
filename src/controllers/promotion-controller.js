@@ -38,7 +38,7 @@ export const updatePromotionById = async (req, res) => {
     try {
         const {data, error} = await updatePromotion(id, updates);
         if (error) throw new Error(error.message);
-        res.status(200).json({ message: 'Promotion updated successfully', data });
+        res.status(200).json({ message: 'Promotion updated successfullyy', data });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
