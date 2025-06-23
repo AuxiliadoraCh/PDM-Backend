@@ -1,4 +1,4 @@
-import { createPayment,getPaymentMethods,deletePaymentMethod } from "../services/payment-service.js";
+import { createPayment,getPaymentMethods,deletePaymentMethod,getUserPaymentMethods } from "../services/payment-service.js";
 
 export const addPaymentMethod = async (req, res) => {
     const {name} = req.body;
@@ -28,6 +28,17 @@ export const deletePayment = async (req,res) => {
         const {error } = await deletePaymentMethod(id);
         if (error) throw new Error(error.message)
         res.status(200).json({ message: 'Payment method deleted successfully' })
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+}
+
+export const fetchUserPaymentMethods = async (req, res) => {
+    const user_id = req.user.id;
+    try {
+        const {data, error} = await getUserPaymentMethods(user_id);
+        if (error) throw new Error(error.message)
+        res.status(200).json(data)
     } catch (error) {
         res.status(400).json({ message: error.message })
     }

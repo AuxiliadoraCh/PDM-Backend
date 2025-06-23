@@ -1,4 +1,4 @@
-import { signUp, signIn } from '../services/auth-service.js'
+import { signUp, signIn} from '../services/auth-service.js'
 
 export const registerUser = async (req, res) => {
   const { email, password } = req.body
@@ -19,3 +19,5 @@ export const loginUser = async (req, res) => {
     res.status(400).json({ message: error.message })
   }
 }
+
+

@@ -1,4 +1,4 @@
-import { createIncome,getIncomes,getIncomeById,modifyIncome,removeIncome } from "../services/income-service.js";
+import { createIncome,getIncomes,getIncomeById,modifyIncome,removeIncome,getIncomesByMonth,sumIncomesByMonth } from "../services/income-service.js";
 
 export const addIncome = async (req,res) => {
     const {amount,date,description} = req.body
@@ -55,4 +55,37 @@ export const deleteIncome = async (req, res) => {
       res.status(400).json({ message: error.message })
     }
 }
+
+export const fetchIncomesByMonth = async (req, res) => {
+    const { month, year } = req.body
+    const user_id = req.user.id
+    try {
+        const { data, error } = await getIncomesByMonth(user_id, month, year)
+        if (error) throw new Error(error.message)
+        res.status(200).json({ message: 'Incomes for the month', data })
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+}
+
+export const getMonthlyIncomeSum = async (req, res) => {
+    const user_id = req.user.id;
+    const { month, year } = req.body;
+
+    try {
+        if (!user_id || !month || !year) {
+            return res.status(400).json({ message: "Faltan datos requeridos" });
+        }
+
+        const total = await sumIncomesByMonth(user_id, month, year);
+
+        res.status(200).json({
+            message: "Monthly income calculated successfully",
+            monthlyIncome: total
+        });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 

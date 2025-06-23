@@ -51,3 +51,12 @@ export const getActivePromotions = async () => {
         .select('*')
         .eq('active', true) 
 }
+
+// admin
+
+export const countActivePromotions = async () => {
+    return await supabase
+    .from('promotions')
+    .select('*', { count: 'exact', head: true })
+    .eq('active', true);
+}
