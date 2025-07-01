@@ -14,9 +14,10 @@ export const addIncome = async (req,res) => {
 
 export const fetchIncomes = async (req,res) => {
     try {
-        const {data,error} = await getIncomes()
+        const user_id = req.user.id;
+        const {data,error} = await getIncomes(user_id)
         if (error) throw new Error(error.message)
-        res.status(201).json({ message: 'All incomes', data })
+        res.status(201).json({ message: 'incomes', data })
     } catch (error) {
         res.status(400).json({ message: error.message })
     }

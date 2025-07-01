@@ -1,4 +1,4 @@
-import { createPromotion,getPromotionById,getPromotions,updatePromotion,deletePromotion,getActivePromotions,countActivePromotions } from "../services/promotion-service.js";
+import { createPromotion,getPromotionById,getPromotions,updatePromotion,deletePromotion,getActivePromotions,countActivePromotions, changePromotionStatus } from "../services/promotion-service.js";
 
 export const addPromotion = async (req, res) => {
     const {title, description,restaurants,active,start_date,end_date,images} = req.body;
@@ -72,5 +72,17 @@ export const countActivePromotion = async (req, res) => {
         res.status(200).json({activePromotions: count});
     } catch (error) {
         res.status(400).json({ message: error.message });
+    }
+}
+
+export const updatePromotionStatus = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const {active} = req.body;
+        const {data, error} = await changePromotionStatus(id, active);
+        if (error) throw new Error(error.message)
+        res.status(200).json({ message: 'Promotion status updated successfully', data });
+    } catch (error) {
+        res.status(400).json({message: error.message})
     }
 }

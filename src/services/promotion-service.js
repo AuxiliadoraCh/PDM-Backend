@@ -60,3 +60,12 @@ export const countActivePromotions = async () => {
     .select('*', { count: 'exact', head: true })
     .eq('active', true);
 }
+
+export const changePromotionStatus = async(id, active) => {
+    return await supabase
+    .from('promotions')
+    .update({active})
+    .eq('id', id)
+    .select()
+    .single()
+}

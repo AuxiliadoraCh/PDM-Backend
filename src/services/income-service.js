@@ -8,10 +8,11 @@ export const createIncome = async ({user_id,amount,date,description}) => {
 
 }
 
-export const getIncomes = async () => {
+export const getIncomes = async (user_id) => {
     return await supabase
     .from("incomes")
     .select("*")
+    .eq("user_id", user_id)
 }
 
 export const getIncomeById = async (id) => {
@@ -34,7 +35,7 @@ export const removeIncome = async (id) => {
     return await supabase
     .from("incomes")
     .delete
-    .eq|("id", id)
+    .eq("id", id)
 }
 
 export const getIncomesByMonth = async (user_id, month, year) => {
