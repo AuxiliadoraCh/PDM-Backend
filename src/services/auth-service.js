@@ -1,4 +1,5 @@
 import { supabase } from '../config/supabase-client.js'
+import { assignRole } from './role-service.js'
 
 export const signUp = async (email, password) => {
   const { data, error } = await supabase.auth.signUp({
@@ -10,7 +11,16 @@ export const signUp = async (email, password) => {
     throw new Error(`Error signing up: ${error.message}`);
   }
 
-  return data?.user ?? null;
+  const user = data?.user
+
+  if (!user) {
+    throw new Error('User creation failed.')
+  }
+
+  // Asignar rol por defecto ("user")
+  await assignRole(user.id, 'user') // Se asume que 'user' es el rol por defecto
+
+  return user
 };
 
 export const signIn = async (email, password) => {
