@@ -2,7 +2,8 @@ import { createBudget, getBudgets, getBudget, updateBudget, deleteBudget } from 
 
 // Crear presupuesto
 export const postBudget = async (req, res) => {
-  const { user_id, category_id, month, year, amount } = req.body
+  const user_id = req.user.id
+  const { category_id, month, year, amount } = req.body
   try {
     const budget = await createBudget(user_id, category_id, month, year, amount)
     res.status(201).json({ message: 'Budget created', budget })
@@ -13,7 +14,7 @@ export const postBudget = async (req, res) => {
 
 // Obtener todos los presupuestos de un usuario
 export const getUserBudgets = async (req, res) => {
-  const { user_id } = req.params
+  const  user_id  = req.user.id
   try {
     const budgets = await getBudgets(user_id)
     res.status(200).json(budgets)
