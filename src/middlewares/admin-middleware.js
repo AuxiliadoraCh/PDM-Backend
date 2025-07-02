@@ -4,7 +4,7 @@ export const isAdmin = async (req, res, next) => {
   try {
     // Extraemos el user_id del token, cabecera o body
     // Aquí asumimos que lo pasas en `req.user_id`, puedes adaptarlo a tu lógica de autenticación
-    const user_id = req.user_id || req.body.user_id || req.params.user_id
+    const user_id = req.user?.id
 
     if (!user_id) {
       return res.status(401).json({ message: 'User ID is required' })
