@@ -18,7 +18,8 @@ export const isAdmin = async (req, res, next) => {
       .single()
 
     if (error) {
-      return res.status(500).json({ message: error.message })
+      console.error('Error querying roles:', error.message); // Log the error server-side
+      return res.status(500).json({ message: 'An error occurred while processing your request' }); // Return a generic message to the client
     }
 
     if (data.role !== 'admin') {
