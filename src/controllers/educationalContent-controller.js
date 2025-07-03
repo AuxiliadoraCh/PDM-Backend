@@ -17,7 +17,7 @@ export const postEducationalContent = async (req, res) => {
 }
 
 // Obtener todos los contenidos educativos
-export const getEducationalContents = async (req, res) => {
+export const getEducationalContent = async (req, res) => {
     const user_id = req.user.id
     try {
         const educationalContents = await getEducationalContents(user_id)
@@ -28,7 +28,7 @@ export const getEducationalContents = async (req, res) => {
 }
 
 // Obtener un contenido educativo específico
-export const getSingleEducationalContent = async (req, res) => {
+export const getSingleEducationalContents = async (req, res) => {
     const { id } = req.params
     try {
         const educationalContent = await getSingleEducationalContent(id)

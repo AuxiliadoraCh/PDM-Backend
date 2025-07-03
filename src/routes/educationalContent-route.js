@@ -1,14 +1,14 @@
 import { Router } from 'express'
-import { postEducationalContent, getEducationalContents, getSingleEducationalContent, putEducationalContent, removeEducationalContent } from '../controllers/educationalContent-controller.js'
+import { postEducationalContent, getEducationalContent, getSingleEducationalContents, putEducationalContent, removeEducationalContent } from '../controllers/educationalContent-controller.js'
 import { verifyUser } from '../middlewares/auth.middleware.js'
 
 const educationalContentRoutes = Router()
 
 educationalContentRoutes.post('/', verifyUser, postEducationalContent)
 
-educationalContentRoutes.get('/', verifyUser, getEducationalContents)
+educationalContentRoutes.get('/', verifyUser, getEducationalContent)
 
-educationalContentRoutes.get('/:id', verifyUser, getSingleEducationalContent)
+educationalContentRoutes.get('/:id', verifyUser, getSingleEducationalContents)
 
 educationalContentRoutes.put('/:id', verifyUser, putEducationalContent)
 
