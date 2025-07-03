@@ -23,6 +23,27 @@ export const signUp = async (email, password) => {
   return user
 };
 
+export const AdminsignUp = async (email, password) => {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password
+  });
+
+  if (error) {
+    throw new Error(`Error signing up: ${error.message}`);
+  }
+
+  const user = data?.user
+
+  if (!user) {
+    throw new Error('User creation failed.')
+  }
+
+  await assignRole(user.id, 'admin') // Se asigna rol admin
+
+  return user
+};
+
 export const signIn = async (email, password) => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
