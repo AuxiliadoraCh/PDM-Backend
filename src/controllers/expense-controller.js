@@ -2,7 +2,8 @@ import { createExpense, getExpenses, updateExpense, deleteExpense } from '../ser
 
 // Crear gasto
 export const postExpense = async (req, res) => {
-  const { user_id, amount, description, category_id, payment_id } = req.body
+  const user_id = req.user.id
+  const { amount, description, category_id, payment_id } = req.body
   try {
     const expense = await createExpense(user_id, amount, description, category_id, payment_id)
     res.status(201).json({ message: 'Expense created', expense })
@@ -13,7 +14,7 @@ export const postExpense = async (req, res) => {
 
 // Obtener gastos por usuario
 export const getUserExpenses = async (req, res) => {
-  const { user_id } = req.params
+  const user_id = req.user.id
   try {
     const expenses = await getExpenses(user_id)
     res.status(200).json(expenses)
