@@ -1,6 +1,5 @@
 import { Router } from 'express'
 import { postExpense, getUserExpenses, updateUserExpenses, deleteUserExpenses } from '../controllers/expense-controller.js'
-import { verify } from 'crypo'
 import { verifyUser } from '../middlewares/auth.middleware.js'
 
 const expenseRoutes = Router()
